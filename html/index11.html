@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>111-3D播放器上</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            width: 100%;
+            height:100%;
+            background: url("../img/7.jpg") no-repeat;
+            background-size:cover;/*注意：无论浏览器多宽多高，都可以填满整个网页， 
+                                  cover含义: 1.告诉系统图片需要等比拉伸 2.告诉系统图片 
+                                   需要拉伸到宽度和高度都填满元素 */
+            overflow: hidden;/*消除滚动条*/
+        }
+        ul{
+            width: 200px;
+            height: 200px;
+            /*background-color: red;*/
+            position: absolute;/*这句话以及下一句是为了实现不管浏览器窗口如何变化，这个ul一直距离底部100px*/
+            bottom: 100px;
+            left: 50%;/*这句话以及下一句是为了实现不管浏览器窗口如何变化，这个ul一直水平居中*/
+            margin-left:-100px;/*负的宽度的一半*/
+            transform-style: preserve-3d;/*若想看到子元素呈3d效果，要给父元素增加这句话*/
+            /*transform: rotateX(-10deg);*/  /*增加一个俯视的视角，在sport中添加的rotateY会把这句话覆盖掉，所以将这句话直接添加到sport方法中*/
+            animation: sport 6s linear 0s infinite normal;/*围绕y轴无限转动*/
+        }
+        ul li{
+            list-style: none;
+            width: 200px;
+            height: 200px;
+            font-size: 60px;
+            text-align: center;
+            line-height: 200px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        ul li:nth-child(1){
+            background-color: black;
+            transform: rotateY(60deg) translateZ(200px);/*先旋转后平移*/
+        }
+        ul li:nth-child(2){
+            background-color: black;
+            transform: rotateY(120deg) translateZ(200px);
+        }
+        ul li:nth-child(3){
+            background-color: black;
+            transform: rotateY(180deg) translateZ(200px);
+        }
+        ul li:nth-child(4){
+            background-color: black;
+            transform: rotateY(240deg) translateZ(200px);
+        }
+        ul li:nth-child(5){
+            background-color: black;
+            transform: rotateY(300deg) translateZ(200px);
+        }
+        ul li:nth-child(6){
+            background-color: black;
+            transform: rotateY(360deg) translateZ(200px);
+        }
+        ul li img{
+            width: 200px;/*实际图片比较大，设置下图片宽高*/
+            height: 200px;
+            border: 5px solid skyblue;/*添加边框*/
+            box-sizing: border-box;/*保证添加边框不改变大小*/
+        }
+		
+		 ul:hover{
+            animation-play-state: paused;
+        }
+        ul:hover li img{
+            opacity: 0.5;/*添加黑色蒙版*/
+        }
+        ul li:hover img{
+            opacity: 1;/*被选中的li不需要添加黑色蒙版*/
+        }
+		
+        @keyframes sport {
+            from{
+                /*
+                注意点:
+                1.动画中如果有和默认样式中同名的属性, 会覆盖默认样式中同名的属性
+                2.在编写动画的时候, 固定不变的值写在前面, 需要变化的值写在后面
+                */
+                transform: rotateX(-10deg) rotateY(0deg);/*rotateY()：绕y轴无限旋转 rotateX()参考ul中的transform: rotateX(-10deg);解释*/
+            }
+            to{
+                transform: rotateX(-10deg) rotateY(360deg);
+            }
+        }
+		
+		.heart{
+            width: 173px;
+            height: 157px;
+            position: absolute;
+            left: 100px;
+            bottom: 100px;
+            animation: move 10s linear 0s infinite normal;
+        }
+		
+		 @keyframes move {/*复杂动画不用from..to..，使用百分比来做*/
+            0%{
+                left: 100px;
+                bottom: 100px;
+                opacity: 1;
+            }
+            20%{
+                left: 300px;
+                bottom: 300px;
+                opacity: 0;
+            }
+            40%{
+                left: 500px;
+                bottom: 500px;
+                opacity: 1;
+            }
+            60%{
+                left: 800px;
+                bottom: 300px;
+                opacity: 0;
+            }
+            80%{/*移动到这里的时候，超出屏幕，下方会出现滚动条，所以要在body中添加overflow: hidden;*/
+                left: 1200px;
+                bottom: 100px;
+                opacity: 1;
+            }
+            100%{
+                left: 800px;
+                bottom: -200px;
+            }
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li><img src="../img/1.jpg" alt=""></li>
+    <li><img src="../img/4.jpg" alt=""></li>
+    <li><img src="../img/5.jpg" alt=""></li>
+    <li><img src="../img/8.jpg" alt=""></li>
+    <li><img src="../img/9.jpg" alt=""></li>
+    <li><img src="../img/12.jpg" alt=""></li>
+</ul>
+<img src="../img/6.jpg" class="heart">
+<audio src="../music/1.mp3" autoplay="autoplay" loop="loop"/>
+<!-- <audio src="images/jacky/江哥最爱的歌.mp3" autoplay="autoplay" loop="loop"></audio> -->
+</body>
+</html>
